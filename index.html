@@ -1,0 +1,49 @@
+<html ng-app = "readDisplayCSV">
+ 	<head>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+ 		<script src="js/underscore.js"></script>
+		 <script type="text/javascript" src="app.js"></script>
+		 <style>
+			table, td, th {
+				border: 1px solid black;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			th {
+				height: 50px;
+			}
+		 </style>
+ 	</head>
+
+ 	<body ng-controller = "readDisplayController">
+ 		<H1 style="text-align: center">{{title}}</H1>
+ 		<div>
+	        <label for="avatar">Choose a CSV File:</label>
+	        <br>
+	        <br>
+	        <input type="file" name = "file" accept=".csv" csv-reader="contentJSON"/>
+			<p ng-if="contentJSON.validation" style="color:red">The file type is only .CSV</p>
+			<div ng-if="!contentJSON.validation">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th ng-repeat="title in contentJSON.title">
+								{{title}}
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in contentJSON.content">
+							<td ng-repeat="title in contentJSON.title" ng-bind="data[title]"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+    	</div>
+ 	</body>
+</html>
